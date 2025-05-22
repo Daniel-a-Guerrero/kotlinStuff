@@ -6,7 +6,9 @@ fun main() {
     var z=x+y
     println("${x}+${y}=${z}")
     println("Hello World!")
-    println(factorial(z))
+    println("${x}!=${factorial(x)}")
+    println("${y}!=${factorial(y)}")
+    println("${z}!=${factorial(z)}")
 }
 fun factorial(a:Int): Int
 {
