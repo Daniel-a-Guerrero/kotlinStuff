@@ -2,10 +2,10 @@ package org.example
 import java.util.Scanner
 import java.util.Random
 fun main() {
-    val X1:Int=2; val X2:Int=2;val Y1:Int=2;val Y2:Int=2
+    var X1:Int = 0; var X2:Int = 0;var Y1:Int = 0;var Y2:Int = 0
     //random "seed"
     val random=Random()
-    /*try {
+    try {
         println("Enter X axis of Matrix 1:")
         X1 = Scanner(System.`in`).nextInt()
         println("Enter Y axis of Matrix 1:")
@@ -21,11 +21,12 @@ fun main() {
     }
     catch (e:IllegalArgumentException){
         println("Invalid axes: ${e.message}")
-    }*/
+    }
 
     //declare matrix arrays
     val m1=Array(Y1){Array<Int>(X1){0}}
     val m2=Array(Y2){Array<Int>(X2){0}}
+
     //print out initial matrices
     println("Matrix 1:")
     for(i in 0..Y1-1)
@@ -36,6 +37,7 @@ fun main() {
         }
     }
     printMatrix(m1)
+
     println("\nMatrix 2:")
     for(i in 0..Y2-1)
     {
@@ -46,27 +48,12 @@ fun main() {
     }
     printMatrix(m2)
 println("")
-    //Determine if |M1[0]|==|M2|
-    try {
-        if(X1!=Y2)
-        {
-            throw IllegalArgumentException("\nCan only multiply Matrices with same x axis and y axis of matrices 1 and 2 respectively")
-        }
-    }
-    catch (e:IllegalArgumentException){
-    println("\nInvalid axes: ${e.message}")
-    }
 
-    var col= getColumn(m2)
-    for (i in col)
-    {
-        println(i)
-    }
-    val oo= multStep(col,m1[0])
-    println(oo)
 
-    var qanon= multMatrix(m1,m2)
-    printMatrix(qanon)
+
+
+    val productMatrix= multMatrix(m1,m2)
+    printMatrix(productMatrix)
 }
 
 //make an array based on the column
