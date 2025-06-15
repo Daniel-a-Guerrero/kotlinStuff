@@ -3,54 +3,13 @@ import java.util.Scanner
 import java.util.Random
 //import java.io.IO.*
 fun main() {
-    var X1:Int = 0; var X2:Int = 0;var Y1:Int = 0;var Y2:Int = 0
-    //random "seed"
-    val random=Random()
-    val scanner = Scanner(System.`in`)
-        println("Enter X axis of Matrix 1 and Y axis of Matrix 2:")
-        X1 = scanner.nextInt()
-        Y2 = X1
-        println("Enter Y axis of Matrix 1:")
-        Y1 = scanner.nextInt()
-        println("Enter X axis of Matrix 2:")
-        X2 = scanner.nextInt()
-
-            //declare matrix arrays
-            val m1=Array(Y1){Array<Int>(X1){0}}
-            val m2=Array(Y2){Array<Int>(X2){0}}
-
-            //print out initial matrices
-            println("Matrix 1:")
-            for(i in 0 until Y1)
-            {
-                for (j in 0 until X1)
-                {
-                    m1[i][j]=random.nextInt(21)-10
-                }
-            }
-            printMatrix(m1)
-
-            println("${getDeterminant(m1)}\n")
-
-            println("\nMatrix 2:")
-            for(i in 0..Y2-1)
-            {
-                for (j in 0..X2-1)
-                {
-                    m2[i][j]=random.nextInt(21)-10
-                }
-            }
-            printMatrix(m2)
-            println("${getDeterminant(m2)}\n")
-    println("")
-            val productMatrix= multMatrix(m1,m2)
-            printMatrix(productMatrix)
+    originalMain()
 }
 
 //make an array based on the column
 fun getColumn(m:Array<Array<Int>>,index:Int=0):Array<Int>
 {
-    var retu=Array(m.size){0}
+    val retu=Array(m.size){0}
     for(i in 0..m.size-1)
     {
         retu[i]=m[i][index]
@@ -71,16 +30,15 @@ fun multStep(m:Array<Int>,n:Array<Int>):Int
 //multiply matrix algorithm
 fun multMatrix(m:Array<Array<Int>>,n:Array<Array<Int>>):Array<Array<Int>>?
 {
-    if(m.size==0)
+    if(m.isEmpty())
         return null
-    var reto=Array(m.size){Array<Int>(n[0].size){0}}
+    val reto=Array(m.size){Array(n[0].size){0}}
     val mark=m.size-1
-    var s:Int=0
     for(i in 0..mark)
     {
         for(j in 0..n[0].size-1)
         {
-            s= multStep(m[i], getColumn(n,j))
+            val s= multStep(m[i], getColumn(n,j))
             reto[i][j]=s
         }
     }
@@ -88,7 +46,7 @@ fun multMatrix(m:Array<Array<Int>>,n:Array<Array<Int>>):Array<Array<Int>>?
 }
 
 //reusable printer for matrices
-fun printMatrix(m:Array<Array<Int>>?):Unit
+fun printMatrix(m:Array<Array<Int>>?)
 {
     if(m==null)
         println(' ')
@@ -112,7 +70,7 @@ fun printMatrix(m:Array<Array<Int>>?):Unit
 //Determine if it is possible to get a determinant
 fun deterDeter(m:Array<Array<Int>>): Boolean
 {
-    if(m.size==0) return false
+    if(m.isEmpty()) return false
     val i:Boolean = m.size==m[0].size
     /*when(i)
     {
@@ -141,7 +99,7 @@ fun getDeterminant(m:Array<Array<Int>>):Int {
             if(i%2==1) {
                 mark *= -1
             }
-            var mm = micro(m,i)
+            val mm = micro(m,i)
             when(mm)
             {
                 null->mark=0
@@ -155,7 +113,7 @@ fun getDeterminant(m:Array<Array<Int>>):Int {
 
 //get smaller matrix
 fun micro(m:Array<Array<Int>>,tic:Int):Array<Array<Int>>?{
-    var m0 = Array(m.size-1){Array<Int>(m[0].size-1){0}}
+    val m0 = Array(m.size-1){Array(m[0].size-1){0}}
     for(i in 1..m.size-1) {
         for(j in 0..m[0].size-1) {
             var rJ=j
@@ -170,4 +128,51 @@ fun micro(m:Array<Array<Int>>,tic:Int):Array<Array<Int>>?{
         }
     }
     return m0
+}
+
+//original main function
+fun originalMain()
+{
+    //random "seed"
+    val random=Random()
+    val scanner = Scanner(System.`in`)
+    println("Enter X axis of Matrix 1 and Y axis of Matrix 2:")
+    val x1 = scanner.nextInt()
+    val y2 = x1
+    println("Enter Y axis of Matrix 1:")
+    val y1 = scanner.nextInt()
+    println("Enter X axis of Matrix 2:")
+    val x2 = scanner.nextInt()
+
+    //declare matrix arrays
+    val m1=Array(y1){Array(x1){0}}
+    val m2=Array(y2){Array(x2){0}}
+
+    //print out initial matrices
+    println("Matrix 1:")
+    for(i in 0 until y1)
+    {
+        for (j in 0 until x1)
+        {
+            m1[i][j]=random.nextInt(21)-10
+        }
+    }
+    printMatrix(m1)
+
+    println("${getDeterminant(m1)}\n")
+
+    println("\nMatrix 2:")
+    for(i in 0..y2-1)
+    {
+        for (j in 0..x2-1)
+        {
+            m2[i][j]=random.nextInt(21)-10
+        }
+    }
+    printMatrix(m2)
+    println("${getDeterminant(m2)}\n")
+    println("")
+    val productMatrix= multMatrix(m1,m2)
+    printMatrix(productMatrix)
+
 }
