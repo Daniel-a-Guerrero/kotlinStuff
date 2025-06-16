@@ -27,6 +27,25 @@ fun multStep(m:Array<Int>,n:Array<Int>):Int
     return prod
 }
 
+//add matrices
+fun addMatrix(m:Array<Array<Int>>,n:Array<Array<Int>>): Array<Array<Int>>?
+{
+    if(m.size!=n.size||m[0].size!=n[0].size)
+    {
+        println("Cannot add matrices of different dimensions")
+        return null
+    }
+    val rMat=m
+    for(i in 0 until m.size)
+    {
+        for(j in 0 until m[0].size)
+        {
+            rMat[i][j]+=n[i][j]
+        }
+    }
+    return rMat
+}
+
 //multiply matrix algorithm
 fun multMatrix(m:Array<Array<Int>>,n:Array<Array<Int>>):Array<Array<Int>>?
 {
@@ -130,6 +149,8 @@ fun micro(m:Array<Array<Int>>,tic:Int):Array<Array<Int>>?{
     return m0
 }
 
+//--------------------------------------------------------------------------------------------------
+
 //original main function
 fun originalMain()
 {
@@ -174,5 +195,12 @@ fun originalMain()
     println("")
     val productMatrix= multMatrix(m1,m2)
     printMatrix(productMatrix)
+    println("\n\nSum of two matrices:\n")
+    println(printMatrix(addMatrix(m1,m2)))
+}
 
+//main function designed for class
+fun classMain()
+{
+    //val m1 = Matrix()
 }
