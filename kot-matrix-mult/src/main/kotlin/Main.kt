@@ -3,7 +3,7 @@ import java.util.Scanner
 import java.util.Random
 //import java.io.IO.*
 fun main() {
-    originalMain()
+    classMain()
 }
 
 //make an array based on the column
@@ -202,5 +202,5 @@ fun originalMain()
 //main function designed for class
 fun classMain()
 {
-    //val m1 = Matrix()
+    val m1 = Matrix(2,2)
 }
